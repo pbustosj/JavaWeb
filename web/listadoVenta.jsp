@@ -4,6 +4,8 @@
     Author     : Desarrollador
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="duoc.cl.dej4501.entidades.Venta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +26,52 @@
         <title>Listado - Venta Celulares</title>
     </head>
     <body>
-        <h1>Listado Venta</h1>
+      
+
+        <%
+            if (session.getAttribute("listadoVentas") != null) {
+                List<Venta> listadoVentas = (List<Venta>) session.getAttribute("listadoVentas");
+
+        %>
+        <div class="container">
+              <h1>Listado Venta</h1>
+            <table class="highlight centered responsive-table">
+                <thead>
+                    <tr>
+                        <th>Código Venta</th>
+                        <th>Comprador</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <%for (Venta venta : listadoVentas) {
+
+
+                    %>
+                    <tr>
+                        <td>
+                            <%=venta.getCodigo()%>
+                        </td>
+                        <td>
+                            <%=venta.getNombreComprador()%>
+                        </td>
+                        <td>
+                            <%=venta.getCantTelefonos()%>
+                        </td>
+
+
+                    </tr>
+
+                    <%}
+                    %>
+                </tbody>
+            </table>
+        </div>
+        <%    } else {
+        %>
+        No hay datos.
+        <% }%>
     </body>
 </html>

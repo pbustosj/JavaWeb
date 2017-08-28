@@ -29,11 +29,9 @@ public class creaVentaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Venta> listadoCompanias=null;
+
         HttpSession sesion = request.getSession();
-        if (sesion.getAttribute("listadoVentas") == null) {
-             listadoCompanias= new ArrayList<Venta>() {};
-        }
+
         String nombreComprador = request.getParameter("txtComprador");
         int codVendedor = Integer.parseInt(request.getParameter("ddlVendedor"));
         int codMarcas = Integer.parseInt(request.getParameter("ddlMarcas"));
@@ -41,7 +39,17 @@ public class creaVentaServlet extends HttpServlet {
         //String cantidad=request.getParameter("txtCantidad");
         int cantidad = Integer.parseInt(request.getParameter("txtCantidad"));
         Venta objVenta = new Venta(nombreComprador, codVendedor, codCompa, codMarcas, codCompa, cantidad);
-        listadoCompanias.add(objVenta);
+
+        if (sesion.getAttribute("listadoVentas") == null) {
+            List<Venta> listadoVentas = new ArrayList<Venta>();
+        listadoVentas.add(objVenta);
+        sesion.setAttribute("listadoVentas", listadoVentas);
+        } else {
+            List<Venta> listadoVentas = (ArrayList<Venta>) sesion.getAttribute("listadoVentas");
+            listadoVentas.add(objVenta);
+            sesion.setAttribute("listadoVentas", listadoVentas);
+        }
+
         sesion.setAttribute("menOk", true);
         response.sendRedirect("ingresoVenta.jsp");
     }
