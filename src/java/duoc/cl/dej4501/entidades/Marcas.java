@@ -1,8 +1,10 @@
 
 package duoc.cl.dej4501.entidades;
 
+import java.io.Serializable;
 
-public class Marcas {
+
+public class Marcas implements Serializable{
     private int id;
     private String nombre;
     private int costo;

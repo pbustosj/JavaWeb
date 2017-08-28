@@ -1,7 +1,9 @@
 
 package duoc.cl.dej4501.entidades;
 
-public class Vendedor {
+import java.io.Serializable;
+
+public class Vendedor implements Serializable{
     private int id;
     private String nombre;
     private String apellido;

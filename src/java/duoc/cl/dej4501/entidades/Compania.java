@@ -1,6 +1,8 @@
 package duoc.cl.dej4501.entidades;
 
-public class Compania {
+import java.io.Serializable;
+
+public class Compania implements Serializable{
 
     private int id;
     private String nombre;
