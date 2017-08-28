@@ -1,9 +1,13 @@
-<%-- 
-    Document   : listadoVenta
-    Created on : 21-08-2017, 10:30:52
-    Author     : Desarrollador
---%>
 
+<%@page import="duoc.cl.dej4501.entidades.Vendedor"%>
+<%@page import="duoc.cl.dej4501.entidades.Compania"%>
+<%@page import="duoc.cl.dej4501.negocio.CompaniaController"%>
+<%@page import="duoc.cl.dej4501.negocio.VendedorController"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="duoc.cl.dej4501.negocio.MarcaController"%>
+<%@page import="duoc.cl.dej4501.entidades.Marcas"%>
+<%@page import="java.math.MathContext"%>
 <%@page import="java.util.List"%>
 <%@page import="duoc.cl.dej4501.entidades.Venta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,7 +30,7 @@
         <title>Listado - Venta Celulares</title>
     </head>
     <body>
-      
+
 
         <%
             if (session.getAttribute("listadoVentas") != null) {
@@ -34,21 +38,31 @@
 
         %>
         <div class="container">
-              <h1>Listado Venta</h1>
+            <h1 class="center-align">Listado Venta</h1>
             <table class="highlight centered responsive-table">
                 <thead>
                     <tr>
                         <th>Código Venta</th>
                         <th>Comprador</th>
                         <th>Cantidad</th>
+                        <th>Vendedor</th>
+                        <th>Marca</th>
+                        <th>Compañia</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
                     <%for (Venta venta : listadoVentas) {
-
-
+                            LinkedList<Marcas> listaMarcas = (LinkedList<Marcas>) session.getAttribute("listadoMarcas");
+                            LinkedList<Compania> listaCompa = (LinkedList<Compania>) session.getAttribute("listadoCompanias");
+                            LinkedList<Vendedor> listaVende = (LinkedList<Vendedor>) session.getAttribute("listadoVendedores");
+                            MarcaController mC = new MarcaController(listaMarcas);
+                            VendedorController vC = new VendedorController(listaVende);
+                            CompaniaController cC = new CompaniaController(listaCompa);
+                            Marcas objMarca = mC.show(venta.getCodigoMarca());
+                            Compania objCompa = cC.show(venta.getCodigoCompania());
+                            Vendedor objVende = vC.show(venta.getCodVendedor());
                     %>
                     <tr>
                         <td>
@@ -60,18 +74,33 @@
                         <td>
                             <%=venta.getCantTelefonos()%>
                         </td>
+                        <td>
+                            <%=objVende.getFullName()%>
+                        </td>
+                        <td>
+                            <%=objMarca.getNombre()%>
+                        </td>
+                        <td>
+                            <%=objCompa.getNombre()%>
+                        </td>
 
 
                     </tr>
 
-                    <%}
+                    <%
+                            objMarca = null;
+                        }
                     %>
                 </tbody>
             </table>
+
+
         </div>
         <%    } else {
         %>
         No hay datos.
         <% }%>
+        <br><br>
+        <div class="center-align">   <a class="btn green pulse" href ="ingresoVenta.jsp">Ir a Ingresar Venta</a></div>
     </body>
 </html>

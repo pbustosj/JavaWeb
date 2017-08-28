@@ -2,24 +2,30 @@
 package duoc.cl.dej4501.entidades;
 
 public class Venta {
+
+    
     private String nombreComprador;
     private int codVendedor;
     private int codigo;
     private int codigoMarca;
+    private int codigoCompania;
+    
     private int precioVentaSI;
     private int cantTelefonos;
 
-    public Venta() {
-    }
-
-    public Venta(String nombreComprador, int codVendedor, int codigo, int codigoMarca, int precioVentaSI, int cantTelefonos) {
+    public Venta(String nombreComprador, int codVendedor, int codigo, int codigoMarca, int codigoCompania, int precioVentaSI, int cantTelefonos) {
         this.nombreComprador = nombreComprador;
         this.codVendedor = codVendedor;
         this.codigo = codigo;
         this.codigoMarca = codigoMarca;
+        this.codigoCompania = codigoCompania;
         this.precioVentaSI = precioVentaSI;
         this.cantTelefonos = cantTelefonos;
     }
+
+    public Venta() {
+    }
+
 
     public String getNombreComprador() {
         return nombreComprador;
@@ -69,6 +75,18 @@ public class Venta {
         this.cantTelefonos = cantTelefonos;
     }
     
-   
+   /**
+     * @return the codigoCompania
+     */
+    public int getCodigoCompania() {
+        return codigoCompania;
+    }
+
+    /**
+     * @param codigoCompania the codigoCompania to set
+     */
+    public void setCodigoCompania(int codigoCompania) {
+        this.codigoCompania = codigoCompania;
+    }
     
 }

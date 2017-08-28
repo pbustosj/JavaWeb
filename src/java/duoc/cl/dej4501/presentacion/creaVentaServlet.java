@@ -9,6 +9,7 @@ import duoc.cl.dej4501.entidades.Venta;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,14 +32,15 @@ public class creaVentaServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession sesion = request.getSession();
-
+        Random codigo = new Random();
+        
         String nombreComprador = request.getParameter("txtComprador");
         int codVendedor = Integer.parseInt(request.getParameter("ddlVendedor"));
         int codMarcas = Integer.parseInt(request.getParameter("ddlMarcas"));
         int codCompa = Integer.parseInt(request.getParameter("ddlCompanias"));
         //String cantidad=request.getParameter("txtCantidad");
         int cantidad = Integer.parseInt(request.getParameter("txtCantidad"));
-        Venta objVenta = new Venta(nombreComprador, codVendedor, codCompa, codMarcas, codCompa, cantidad);
+        Venta objVenta = new Venta(nombreComprador, codVendedor, (int)(codigo.nextDouble()*100+0),codMarcas, codCompa, codCompa, cantidad);
 
         if (sesion.getAttribute("listadoVentas") == null) {
             List<Venta> listadoVentas = new ArrayList<Venta>();

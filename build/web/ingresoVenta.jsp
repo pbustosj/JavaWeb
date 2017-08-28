@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="input-field col s6 center">
-                            <a class="waves-effect waves-light btn modal-trigger green btn-large" href="#modal1" id="calcularPrecio" style="font-size:25px;">Cotizar<i class="material-icons large">attach_money</i></a>
+                            <a class="pulse waves-effect waves-light btn modal-trigger green btn-large" href="#modal1" id="calcularPrecio" style="font-size:25px;">Cotizar<i class="material-icons large">attach_money</i></a>
                         </div>
                     </div>
                     <div class="row" id="respuesta" style="display:none;border: solid 1px #00cc00;">
